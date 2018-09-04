@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "193075747912",
+    "firebase_url": "https://bigelin-fba37.firebaseio.com",
+    "project_id": "bigelin-fba37",
+    "storage_bucket": "bigelin-fba37.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193075747912:android:265e54ff2b53c33d",
+        "android_client_info": {
+          "package_name": "com.bigelin.bigelin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "193075747912-85gicco9it9qhu5l3193qd4ubieqrvoa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bigelin.bigelin",
+            "certificate_hash": "58a8b0a2bcd385b2ee16561c1574c1c0515e8e26"
+          }
+        },
+        {
+          "client_id": "193075747912-g47f47oldqmjcjb7jka5gnou1b5lfrhr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQqgsP2ykodWe6jRNHFCJgGvHGehXdd9I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193075747912-g47f47oldqmjcjb7jka5gnou1b5lfrhr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
