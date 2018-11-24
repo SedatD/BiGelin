@@ -33,8 +33,6 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.bigelin.bigelin.AqRequest.AqJSONObjectRequest;
-import com.bigelin.bigelin.OrtakEkranlar.Pojo.Gelin;
-import com.bigelin.bigelin.OrtakEkranlar.Pojo.Gelinlikci;
 import com.bigelin.bigelin.Util.MyApplication;
 import com.onesignal.OneSignal;
 
@@ -92,27 +90,34 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         osi = OneSignal.getPermissionSubscriptionState().getSubscriptionStatus().getUserId();
 
-        String loginResponse = MyApplication.get().getPreferences().getString("loginResponse", null);
+        SharedPreferences sharedPreferences = MyApplication.get().getPreferences();
+        String email = sharedPreferences.getString("email", null);
+        String password = sharedPreferences.getString("password", null);
+        if (email != null && !email.equals("") && password != null && !password.equals("")) {
+            aqRequest(email, password, osi);
+        }
+
+        /*String loginResponse = MyApplication.get().getPreferences().getString("loginResponse", null);
         if (loginResponse != null) {
             try {
                 JSONObject jsonObject = new JSONObject(loginResponse);
                 Gelin gelin = new Gelin(jsonObject);
-                requestJson(gelin.getEmail(), gelin.getPass(), osi);
+                aqRequest(gelin.getEmail(), gelin.getPass(), osi);
             } catch (JSONException e) {
                 try {
                     JSONObject jsonObject = new JSONObject(loginResponse);
                     Gelinlikci gelinlikci = new Gelinlikci(jsonObject);
-                    requestJson(gelinlikci.getEmail(), gelinlikci.getPass(), osi);
+                    aqRequest(gelinlikci.getEmail(), gelinlikci.getPass(), osi);
                 } catch (JSONException e1) {
                     e1.printStackTrace();
                     Log.wtf(TAG, "oto login catch : " + e1.getMessage());
                 }
             }
-        }
+        }*/
 
     }
 
-    private void requestJson(String email, String password, String osi) {
+    private void aqRequest(final String email, final String password, String osi) {
         showProgress(true);
         JSONObject params = new JSONObject();
         try {
@@ -130,6 +135,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (response.getBoolean("login")) {
                             SharedPreferences.Editor editor = MyApplication.get().getPreferencesEditor();
                             editor.putString("loginResponse", response + "");
+                            editor.putString("email", email);
+                            editor.putString("password", password);
                             editor.apply();
 
                             finish();
@@ -238,7 +245,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            requestJson(email, password, osi);
+            aqRequest(email, password, osi);
         }
     }
 
